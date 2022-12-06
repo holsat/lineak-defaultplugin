@@ -1,0 +1,96 @@
+This is a crude hack to get this package working with
+libtool2. Better, nicer solutions always welcome.
+
+--- lineak-defaultplugin-0.9.orig/configure.in
++++ lineak-defaultplugin-0.9/configure.in
+@@ -2,10 +2,13 @@ dnl ====================================
+ dnl FILE: configure.in.in
+ dnl =======================================================
+ 
+-AC_INIT(acinclude.m4) dnl a source file from your sub dir
++AC_INIT
+ 
+ dnl This is so we can use kde-common
+ AC_CONFIG_AUX_DIR(admin)
++AC_CONFIG_MACRO_DIR([m4])
++
++LT_INIT
+ 
+ dnl This ksh/zsh feature conflicts with `cd blah ; pwd`
+ unset CDPATH
+--- lineak-defaultplugin-0.9.orig/Makefile.am
++++ lineak-defaultplugin-0.9/Makefile.am
+@@ -14,8 +14,8 @@ $(top_srcdir)/configure.in: configure.in
+ $(top_srcdir)/subdirs:
+ 	cd $(top_srcdir) && $(MAKE) -f admin/Makefile.common subdirs
+ 
+-$(top_srcdir)/acinclude.m4: $(top_srcdir)/admin/acinclude.m4.in $(top_srcdir)/admin/libtool.m4.in $(top_srcdir)/admin/lineak.m4.in
+-	@cd $(top_srcdir) && cat admin/acinclude.m4.in admin/libtool.m4.in admin/lineak.m4.in > acinclude.m4
++$(top_srcdir)/acinclude.m4: $(top_srcdir)/admin/acinclude.m4.in $(top_srcdir)/admin/lineak.m4.in
++	@cd $(top_srcdir) && cat admin/acinclude.m4.in admin/lineak.m4.in > acinclude.m4
+ 
+ MAINTAINERCLEANFILES = subdirs configure.in acinclude.m4 configure.files 
+ 
+--- lineak-defaultplugin-0.9.orig/default_plugin/Makefile.am
++++ lineak-defaultplugin-0.9/default_plugin/Makefile.am
+@@ -20,9 +20,9 @@ man1_MANS = lineak_defaultplugin.1
+ DEFS = @DEFS@ -DCONFDIR=\"@sysconfdir@\" 
+ 
+ install-data-local:
+-	$(mkinstalldirs) ${DESTDIR}$(sysconfdir)/
+-	$(INSTALL_DATA) $(top_srcdir)/media-detect.conf ${DESTDIR}$(sysconfdir)/media-detect.conf
++	$(mkinstalldirs) $(sysconfdir)/
++	$(INSTALL_DATA) $(top_srcdir)/media-detect.conf $(DESTDIR)/$(sysconfdir)/media-detect.conf
+ 
+ uninstall-local:
+-	-rm -f ${DESTDIR}$(sysconfdir)/media-detect.conf
++	-rm -f $(sysconfdir)/media-detect.conf
+ 
+This is a crude hack to get this package working with
+libtool2. Better, nicer solutions always welcome.
+
+--- lineak-defaultplugin-0.9.orig/configure.in
++++ lineak-defaultplugin-0.9/configure.in
+@@ -2,10 +2,13 @@ dnl ====================================
+ dnl FILE: configure.in.in
+ dnl =======================================================
+ 
+-AC_INIT(acinclude.m4) dnl a source file from your sub dir
++AC_INIT
+ 
+ dnl This is so we can use kde-common
+ AC_CONFIG_AUX_DIR(admin)
++AC_CONFIG_MACRO_DIR([m4])
++
++LT_INIT
+ 
+ dnl This ksh/zsh feature conflicts with `cd blah ; pwd`
+ unset CDPATH
+--- lineak-defaultplugin-0.9.orig/Makefile.am
++++ lineak-defaultplugin-0.9/Makefile.am
+@@ -14,8 +14,8 @@ $(top_srcdir)/configure.in: configure.in
+ $(top_srcdir)/subdirs:
+ 	cd $(top_srcdir) && $(MAKE) -f admin/Makefile.common subdirs
+ 
+-$(top_srcdir)/acinclude.m4: $(top_srcdir)/admin/acinclude.m4.in $(top_srcdir)/admin/libtool.m4.in $(top_srcdir)/admin/lineak.m4.in
+-	@cd $(top_srcdir) && cat admin/acinclude.m4.in admin/libtool.m4.in admin/lineak.m4.in > acinclude.m4
++$(top_srcdir)/acinclude.m4: $(top_srcdir)/admin/acinclude.m4.in $(top_srcdir)/admin/lineak.m4.in
++	@cd $(top_srcdir) && cat admin/acinclude.m4.in admin/lineak.m4.in > acinclude.m4
+ 
+ MAINTAINERCLEANFILES = subdirs configure.in acinclude.m4 configure.files 
+ 
+--- lineak-defaultplugin-0.9.orig/default_plugin/Makefile.am
++++ lineak-defaultplugin-0.9/default_plugin/Makefile.am
+@@ -20,9 +20,9 @@ man1_MANS = lineak_defaultplugin.1
+ DEFS = @DEFS@ -DCONFDIR=\"@sysconfdir@\" 
+ 
+ install-data-local:
+-	$(mkinstalldirs) ${DESTDIR}$(sysconfdir)/
+-	$(INSTALL_DATA) $(top_srcdir)/media-detect.conf ${DESTDIR}$(sysconfdir)/media-detect.conf
++	$(mkinstalldirs) $(sysconfdir)/
++	$(INSTALL_DATA) $(top_srcdir)/media-detect.conf $(DESTDIR)/$(sysconfdir)/media-detect.conf
+ 
+ uninstall-local:
+-	-rm -f ${DESTDIR}$(sysconfdir)/media-detect.conf
++	-rm -f $(sysconfdir)/media-detect.conf
+ 

@@ -1,0 +1,70 @@
+This patch fixes some warnings produced by man without (hopefully)
+affecting the appearance.
+
+--- lineak-defaultplugin-0.9.orig/default_plugin/lineak_defaultplugin.1
++++ lineak-defaultplugin-0.9/default_plugin/lineak_defaultplugin.1
+@@ -32,6 +32,7 @@ Here X is a number. The number is a volu
+      e.g. MixerDevice = /dev/mixer
+  
+ .B EAK_MUTE(X,device,X2,device2,X3,device3,...)
++.br
+ .B EAK_PCM_MUTE(X,device,X2,device2,X3,device3,...)
+ 
+ X is a volume to mute to, and device is a string name of a mixer device (e.g. "/dev/mixer" to mute to. As with the previous macro, you will have to experiment with a good value.
+@@ -51,8 +52,11 @@ Increment or decrement the sound by the 
+ Increment or decrement the sound by X. This value is best used between 1 and 5, and the sound modification code scales the value, unlike the MUTE macro. In this form you require a directive in your config file such as:  MixerDevice = /dev/mixer in order for the macro to know which mixer device to adjust.
+  
+ .B EAK_VOLUP(X,device,X2,device2,X3,device3,...)
++.br
+ .B EAK_PCM_UP(X,device,X2,device2,X3,device3,...)
++.br
+ .B EAK_VOLDOWN(X,device,X2,device2,X3,device3,...)
++.br
+ .B EAK_PCM_DOWN(X,device,X2,device2,X3,device3,...)
+ 
+ X is the volume to adjust the following device by. Like the previous form of this macro, a value of 1\-5 is best.
+@@ -64,7 +68,9 @@ These are the default macros. It will ej
+ CdromDevice = /dev/cdrom
+ 
+ .B EAK_OPEN_TRAY(device1,device2,device3,...)
++.br
+ .B EAK_OPEN_TRAY_SCSI(device1,device2,device3,...)
++.br
+ .B EAK_CLOSE_TRAY(device1,device2,device3,...)
+ 
+ 
+This patch fixes some warnings produced by man without (hopefully)
+affecting the appearance.
+
+--- lineak-defaultplugin-0.9.orig/default_plugin/lineak_defaultplugin.1
++++ lineak-defaultplugin-0.9/default_plugin/lineak_defaultplugin.1
+@@ -32,6 +32,7 @@ Here X is a number. The number is a volu
+      e.g. MixerDevice = /dev/mixer
+  
+ .B EAK_MUTE(X,device,X2,device2,X3,device3,...)
++.br
+ .B EAK_PCM_MUTE(X,device,X2,device2,X3,device3,...)
+ 
+ X is a volume to mute to, and device is a string name of a mixer device (e.g. "/dev/mixer" to mute to. As with the previous macro, you will have to experiment with a good value.
+@@ -51,8 +52,11 @@ Increment or decrement the sound by the 
+ Increment or decrement the sound by X. This value is best used between 1 and 5, and the sound modification code scales the value, unlike the MUTE macro. In this form you require a directive in your config file such as:  MixerDevice = /dev/mixer in order for the macro to know which mixer device to adjust.
+  
+ .B EAK_VOLUP(X,device,X2,device2,X3,device3,...)
++.br
+ .B EAK_PCM_UP(X,device,X2,device2,X3,device3,...)
++.br
+ .B EAK_VOLDOWN(X,device,X2,device2,X3,device3,...)
++.br
+ .B EAK_PCM_DOWN(X,device,X2,device2,X3,device3,...)
+ 
+ X is the volume to adjust the following device by. Like the previous form of this macro, a value of 1\-5 is best.
+@@ -64,7 +68,9 @@ These are the default macros. It will ej
+ CdromDevice = /dev/cdrom
+ 
+ .B EAK_OPEN_TRAY(device1,device2,device3,...)
++.br
+ .B EAK_OPEN_TRAY_SCSI(device1,device2,device3,...)
++.br
+ .B EAK_CLOSE_TRAY(device1,device2,device3,...)
+ 
+ 
